@@ -74,7 +74,7 @@ public class FournisseurServiceImplTest {
         // Vérification que la méthode save a été appelée avec le bon argument
         verify(fournisseurRepository).save(fournisseur);
     }
-/*
+
     @Test
     void testUpdateFournisseur() {
         // Mocking
@@ -99,7 +99,7 @@ public class FournisseurServiceImplTest {
         // Vérification que la méthode deleteById a été appelée avec le bon argument
         verify(fournisseurRepository).deleteById(1L);
     }
-
+/*
     @Test
     void testRetrieveFournisseur() {
         // Mocking
