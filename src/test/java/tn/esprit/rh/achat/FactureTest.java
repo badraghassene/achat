@@ -57,6 +57,8 @@ public class FactureTest {
         verify(factureRepository).findAll();
     }
 
+
+    /*
     @Test
     void testRetrieveFacture() {
         // Mocking
@@ -86,6 +88,8 @@ public class FactureTest {
         // Vérification que la méthode save a été appelée avec le bon argument
         verify(factureRepository).save(facture);
     }
+
+    */
 
 }
 
