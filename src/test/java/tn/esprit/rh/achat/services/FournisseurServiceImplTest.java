@@ -34,8 +34,8 @@ class FournisseurServiceImplTest {
     private SecteurActiviteRepository secteurActiviteRepository;
     @MockBean
     private DetailFournisseurRepository detailFournisseurRepository;
-    @MockBean
-    private CategorieFournisseur categorieFournisseur;
+   // @MockBean
+   // private CategorieFournisseur categorieFournisseur;
 
 
     @Autowired
