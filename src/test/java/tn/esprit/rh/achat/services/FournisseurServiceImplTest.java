@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.DetailFournisseur;
 import tn.esprit.rh.achat.entities.Fournisseur;
@@ -34,7 +35,7 @@ class FournisseurServiceImplTest {
     @Mock
     private DetailFournisseurRepository detailFournisseurRepository;
 
-    @Mock
+    @MockBean
     private SecteurActiviteRepository secteurActiviteRepository;
 
     @Test
