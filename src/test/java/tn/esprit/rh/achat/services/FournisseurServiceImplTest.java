@@ -116,7 +116,7 @@ public class FournisseurServiceImplTest {
         // Vérification que la méthode findById a été appelée avec le bon argument
         verify(fournisseurRepository).findById(fournisseurId);
     }
-    /*
+
 
     @Test
     void testAssignSecteurActiviteToFournisseur() {
@@ -140,6 +140,6 @@ public class FournisseurServiceImplTest {
         assertTrue(mockFournisseur.getSecteurActivites().contains(mockSecteurActivite));
         verify(fournisseurRepository).save(mockFournisseur);
     }
-*/
+
 
 }
