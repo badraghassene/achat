@@ -28,15 +28,13 @@ class FournisseurServiceImplTest {
 
     @MockBean
     private FournisseurRepository fournisseurRepository;
-    @MockBean
-    private FactureRepository factureRepository;
+   // @MockBean
+  //  private FactureRepository factureRepository;
     @MockBean
     private SecteurActiviteRepository secteurActiviteRepository;
     @MockBean
     private DetailFournisseurRepository detailFournisseurRepository;
 
-   // @MockBean
-   // private CategorieFournisseur categorieFournisseur;
 
 
     @Autowired
