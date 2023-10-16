@@ -42,6 +42,8 @@ public class FactureTest {
     @MockBean
     private OperateurRepository operateurRepository;
 
+    @MockBean
+    private ProduitRepository produitRepository;
 
 
 
