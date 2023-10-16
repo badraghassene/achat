@@ -123,9 +123,12 @@ public class FournisseurServiceImplTest {
         // Mocking
         Long idSecteurActivite = 1L;
         Long idFournisseur = 2L;
+
+        // Créer un mock de Fournisseur et le configurer pour être retourné par le repository
         Fournisseur mockFournisseur = new Fournisseur();
         when(fournisseurRepository.findById(idFournisseur)).thenReturn(Optional.of(mockFournisseur));
 
+        // Créer un mock de SecteurActivite et le configurer pour être retourné par le repository
         SecteurActivite mockSecteurActivite = new SecteurActivite();
         when(secteurActiviteRepository.findById(idSecteurActivite)).thenReturn(Optional.of(mockSecteurActivite));
 
@@ -138,8 +141,11 @@ public class FournisseurServiceImplTest {
 
         // Vérification que le secteur d'activité a été assigné au fournisseur
         assertTrue(mockFournisseur.getSecteurActivites().contains(mockSecteurActivite));
+
+        // Vérification que la méthode save a été appelée sur le repository de fournisseur
         verify(fournisseurRepository).save(mockFournisseur);
     }
+
 
 
 }
