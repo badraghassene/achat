@@ -4,12 +4,13 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.rh.achat.DTO.ReglementDTO;
 import tn.esprit.rh.achat.entities.Reglement;
 import tn.esprit.rh.achat.services.IReglementService;
 
 import java.util.Date;
 import java.util.List;
-
+import org.modelmapper.ModelMapper;
 @RestController
 @Api(tags = "Gestion des reglements")
 @RequestMapping("/reglement")
@@ -18,23 +19,27 @@ public class ReglementRestController {
 
     @Autowired
     IReglementService reglementService;
+    @Autowired
+    private ModelMapper modelMapper;
 
 
     // http://localhost:8089/SpringMVC/reglement/add-reglement
     @PostMapping("/add-reglement")
     @ResponseBody
-    public Reglement addReglement(@RequestBody Reglement r) {
-        Reglement reglement = reglementService.addReglement(r);
-        return reglement;
+    public ReglementDTO addReglement(@RequestBody ReglementDTO reglementDto) {
+        Reglement reglementRequest = modelMapper.map(reglementDto, Reglement.class);
+        Reglement reglement = reglementService.addReglement(reglementRequest);
+        // convert entity to DTO
+        return modelMapper.map(reglement, ReglementDTO.class);
     }
     @GetMapping("/retrieve-all-reglements")
     @ResponseBody
     public List<Reglement> getReglement() {
-        List<Reglement> list = reglementService.retrieveAllReglements();
-        return list;
+        return reglementService.retrieveAllReglements();
+
     }
 
-    // http://localhost:8089/SpringMVC/reglement/retrieve-reglement/8
+
     @GetMapping("/retrieve-reglement/{reglement-id}")
     @ResponseBody
     public Reglement retrieveReglement(@PathVariable("reglement-id") Long reglementId) {
