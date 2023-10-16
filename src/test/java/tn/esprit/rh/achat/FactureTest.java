@@ -8,10 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.Facture;
-import tn.esprit.rh.achat.repositories.DetailFactureRepository;
-import tn.esprit.rh.achat.repositories.FactureRepository;
-import tn.esprit.rh.achat.repositories.FournisseurRepository;
-import tn.esprit.rh.achat.repositories.ReglementRepository;
+import tn.esprit.rh.achat.repositories.*;
 import tn.esprit.rh.achat.services.FactureServiceImpl;
 
 import java.util.ArrayList;
@@ -42,6 +39,11 @@ public class FactureTest {
     @Autowired
     private FactureServiceImpl factureService;
 
+    @MockBean
+    private OperateurRepository operateurRepository;
+
+
+
 
     @Test
     void testRetrieveAllFactures() {
@@ -58,7 +60,7 @@ public class FactureTest {
     }
 
 
-    /*
+
     @Test
     void testRetrieveFacture() {
         // Mocking
@@ -89,7 +91,7 @@ public class FactureTest {
         verify(factureRepository).save(facture);
     }
 
-    */
+
 
 }
 
