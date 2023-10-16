@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import tn.esprit.rh.achat.entities.CategorieFournisseur;
 import tn.esprit.rh.achat.entities.Fournisseur;
 import tn.esprit.rh.achat.entities.SecteurActivite;
 import tn.esprit.rh.achat.repositories.DetailFournisseurRepository;
@@ -33,6 +34,8 @@ class FournisseurServiceImplTest {
     private SecteurActiviteRepository secteurActiviteRepository;
     @MockBean
     private DetailFournisseurRepository detailFournisseurRepository;
+    @MockBean
+    private CategorieFournisseur categorieFournisseur;
 
 
     @Autowired
