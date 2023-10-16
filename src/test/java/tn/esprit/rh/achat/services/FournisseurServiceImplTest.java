@@ -58,7 +58,7 @@ public class FournisseurServiceImplTest {
         // Vérification que la méthode findAll a été appelée
         verify(fournisseurRepository).findAll();
     }
-/*
+
     @Test
     void testAddFournisseur() {
         // Mocking
@@ -139,6 +139,6 @@ public class FournisseurServiceImplTest {
         assertTrue(mockFournisseur.getSecteurActivites().contains(mockSecteurActivite));
         verify(fournisseurRepository).save(mockFournisseur);
     }
-    */
+
 
 }
