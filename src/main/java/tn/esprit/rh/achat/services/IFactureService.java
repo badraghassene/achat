@@ -20,4 +20,5 @@ public interface IFactureService {
 
 	float pourcentageRecouvrement(Date startDate, Date endDate);
 
+
 }
