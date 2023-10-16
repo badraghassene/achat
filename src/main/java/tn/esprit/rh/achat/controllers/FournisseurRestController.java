@@ -4,7 +4,9 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.rh.achat.entities.Fournisseur;
+import tn.esprit.rh.achat.entitiesDTO.FournisseurDTO;
 import tn.esprit.rh.achat.services.IFournisseurService;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
@@ -12,17 +14,19 @@ import java.util.List;
 @RestController
 @Api(tags = "Gestion des fournisseurss")
 @RequestMapping("/fournisseur")
-public class FournisseurRestController {
+public class FournisseurRestController   {
 
 	@Autowired
 	IFournisseurService fournisseurService;
+	@Autowired
+	private ModelMapper modelMapper;
 
 	// http://localhost:8089/SpringMVC/fournisseur/retrieve-all-fournisseurs
 	@GetMapping("/retrieve-all-fournisseurs")
 	@ResponseBody
 	public List<Fournisseur> getFournisseurs() {
-		List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
-		return fournisseurs;
+		return fournisseurService.retrieveAllFournisseurs();
+
 	}
 
 	// http://localhost:8089/SpringMVC/fournisseur/retrieve-fournisseur/8
@@ -35,12 +39,13 @@ public class FournisseurRestController {
 	// http://localhost:8089/SpringMVC/fournisseur/add-fournisseur
 	@PostMapping("/add-fournisseur")
 	@ResponseBody
-	public Fournisseur addFournisseur(@RequestBody Fournisseur f) {
-		Fournisseur fournisseur = fournisseurService.addFournisseur(f);
-		return fournisseur;
+	public FournisseurDTO addFournisseur(@RequestBody FournisseurDTO fournisseurDto) {
+		Fournisseur FournisseurRequest = modelMapper.map(fournisseurDto, Fournisseur.class);
+		Fournisseur fournisseur = fournisseurService.addFournisseur(FournisseurRequest);
+		// convert entity to DTO
+		return modelMapper.map(fournisseur, FournisseurDTO.class);
 	}
 
-	// http://localhost:8089/SpringMVC/fournisseur/remove-fournisseur/{fournisseur-id}
 	@DeleteMapping("/remove-fournisseur/{fournisseur-id}")
 	@ResponseBody
 	public void removeFournisseur(@PathVariable("fournisseur-id") Long fournisseurId) {
@@ -50,8 +55,12 @@ public class FournisseurRestController {
 	// http://localhost:8089/SpringMVC/fournisseur/modify-fournisseur
 	@PutMapping("/modify-fournisseur")
 	@ResponseBody
-	public Fournisseur modifyFournisseur(@RequestBody Fournisseur fournisseur) {
-		return fournisseurService.updateFournisseur(fournisseur);
+	public FournisseurDTO modifyFournisseur(@RequestBody FournisseurDTO fournisseurDto) {
+		Fournisseur fournisseurRequest = modelMapper.map(fournisseurDto, Fournisseur.class);
+		Fournisseur fournisseur = fournisseurService.updateFournisseur(fournisseurRequest);
+		// convert entity to DTO
+		return modelMapper.map(fournisseur, FournisseurDTO.class);
+
 	}
 
 	// http://localhost:8089/SpringMVC/fournisseur/assignSecteurActiviteToFournisseur/1/5
