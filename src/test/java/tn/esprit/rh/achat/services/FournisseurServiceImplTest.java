@@ -59,21 +59,21 @@ class FournisseurServiceImplTest {
     void testRetrieveFournisseur() {
         // Mocking
         Long id = 1L;
-        Fournisseur mockOperateur = new Fournisseur();
-        when(fournisseurRepository.findById(id)).thenReturn(Optional.of(mockOperateur));
+        Fournisseur mockFournisseur = new Fournisseur();
+        when(fournisseurRepository.findById(id)).thenReturn(Optional.of(mockFournisseur));
 
         // Test
         Fournisseur result = fournisseurService.retrieveFournisseur(id);
 
         // Assertions
-        assertEquals(mockOperateur, result);
+        assertEquals(mockFournisseur, result);
 
         // Vérification que la méthode findById a été appelée avec le bon argument
         verify(fournisseurRepository).findById(id);
     }
 
     @Test
-    void testDeleteOperateur() {
+    void testDeleteFournisseur() {
         doNothing().when(fournisseurRepository).deleteById((Long) any());
 
         // Exécutez la méthode delete du service.
