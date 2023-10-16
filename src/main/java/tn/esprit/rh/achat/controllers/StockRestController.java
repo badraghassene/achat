@@ -2,11 +2,12 @@ package tn.esprit.rh.achat.controllers;
 
 
 import io.swagger.annotations.Api;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.rh.achat.entities.Stock;
+import tn.esprit.rh.achat.entitiesDTO.StockDTO;
 import tn.esprit.rh.achat.services.IStockService;
-
 import java.util.List;
 
 @RestController
@@ -14,7 +15,8 @@ import java.util.List;
 @RequestMapping("/stock")
 @CrossOrigin("*")
 public class StockRestController {
-
+	@Autowired
+	private ModelMapper modelMapper;
 	@Autowired
 	IStockService stockService;
 
@@ -22,8 +24,7 @@ public class StockRestController {
 	@GetMapping("/retrieve-all-stocks")
 	@ResponseBody
 	public List<Stock> getStocks() {
-		List<Stock> list = stockService.retrieveAllStocks();
-		return list;
+		return stockService.retrieveAllStocks();
 	}
 
 	// http://localhost:8089/SpringMVC/stock/retrieve-stock/8
@@ -36,12 +37,13 @@ public class StockRestController {
 	// http://localhost:8089/SpringMVC/stock/add-stock
 	@PostMapping("/add-stock")
 	@ResponseBody
-	public Stock addStock(@RequestBody Stock s) {
-		Stock stock = stockService.addStock(s);
-		return stock;
+	public StockDTO addStock(@RequestBody StockDTO stockDTO) {
+		Stock stockRequest = modelMapper.map(stockDTO, Stock.class);
+		Stock stock = stockService.addStock(stockRequest);
+		// convert entity to DTO
+		return modelMapper.map(stock, StockDTO.class);
 	}
 
-	// http://localhost:8089/SpringMVC/stock/remove-stock/{stock-id}
 	@DeleteMapping("/remove-stock/{stock-id}")
 	@ResponseBody
 	public void removeStock(@PathVariable("stock-id") Long stockId) {
@@ -51,8 +53,11 @@ public class StockRestController {
 	// http://localhost:8089/SpringMVC/stock/modify-stock
 	@PutMapping("/modify-stock")
 	@ResponseBody
-	public Stock modifyStock(@RequestBody Stock stock) {
-		return stockService.updateStock(stock);
+	public StockDTO modifyStock(@RequestBody StockDTO stockDTO) {
+		Stock stockRequest = modelMapper.map(stockDTO, Stock.class);
+		Stock stock = stockService.updateStock(stockRequest);
+			// convert entity to DTO
+			return modelMapper.map(stock, StockDTO.class);
 	}
 
 	/*
@@ -67,7 +72,7 @@ public class StockRestController {
 	//@Scheduled(cron = "*/60 * * * * *")
 	//@GetMapping("/retrieveStatusStock")
 //	@ResponseBody
-//	public void retrieveStatusStock() {
+//
 //		stockService.retrieveStatusStock();
 //	}
 
