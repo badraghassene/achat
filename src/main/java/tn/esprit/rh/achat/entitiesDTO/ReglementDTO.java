@@ -1,4 +1,4 @@
-package tn.esprit.rh.achat.DTO;
+package tn.esprit.rh.achat.entitiesDTO;
 
 
 import tn.esprit.rh.achat.entities.Facture;
