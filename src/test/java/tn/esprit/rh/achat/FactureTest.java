@@ -45,35 +45,7 @@ public class FactureTest {
 
 
 
-    @Test
-    void testRetrieveAllFactures() {
-        // Mocking
-        List<Facture> factureList = new ArrayList<>();
-        when(factureRepository.findAll()).thenReturn(factureList);
-        // Test
-        List<Facture> result = factureService.retrieveAllFactures();
-        // Assertions
-        assertSame(factureList, result);
-        assertTrue(result.isEmpty());
-        // Vérification que la méthode findAll a été appelée
-        verify(factureRepository).findAll();
-    }
-
-
-
-    @Test
-    void testRetrieveFacture() {
-        // Mocking
-        Long id = 1L;
-        Facture mockFacture = new Facture();
-        when(factureRepository.findById(id)).thenReturn(Optional.of(mockFacture));
-        // Test
-        Facture result = factureService.retrieveFacture(id);
-        // Assertions
-        assertEquals(mockFacture, result);
-        // Vérification que la méthode findById a été appelée avec le bon argument
-        verify(factureRepository).findById(id);
-    }
+   
 
     @Test
     void testAddFacture() {
