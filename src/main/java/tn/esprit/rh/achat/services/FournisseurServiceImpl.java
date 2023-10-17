@@ -11,6 +11,7 @@ import tn.esprit.rh.achat.repositories.FournisseurRepository;
 import tn.esprit.rh.achat.repositories.ProduitRepository;
 import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Date;
 import java.util.List;
 
@@ -74,14 +75,15 @@ public class FournisseurServiceImpl implements IFournisseurService {
 
 	@Override
 	public void assignSecteurActiviteToFournisseur(Long idSecteurActivite, Long idFournisseur) {
-		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
-		SecteurActivite secteurActivite = secteurActiviteRepository.findById(idSecteurActivite).orElse(null);
-        fournisseur.getSecteurActivites().add(secteurActivite);
-        fournisseurRepository.save(fournisseur);
-		
-		
+		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur)
+				.orElseThrow(() -> new EntityNotFoundException("Fournisseur non trouvé avec l'ID " + idFournisseur));
+		SecteurActivite secteurActivite = secteurActiviteRepository.findById(idSecteurActivite)
+				.orElseThrow(() -> new EntityNotFoundException("Secteur d'activité non trouvé avec l'ID " + idSecteurActivite));
+
+		fournisseur.getSecteurActivites().add(secteurActivite);
+		fournisseurRepository.save(fournisseur);
 	}
 
-	
+
 
 }
