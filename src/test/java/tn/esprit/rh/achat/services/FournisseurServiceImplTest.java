@@ -25,7 +25,7 @@ import static org.mockito.Mockito.verify;
 
 @ContextConfiguration(classes = {FournisseurServiceImpl.class})
 @ExtendWith(SpringExtension.class)
- class FournisseurServiceImplTest {
+public class FournisseurServiceImplTest {
 
     @Autowired
     private FournisseurServiceImpl fournisseurService;
@@ -124,16 +124,13 @@ import static org.mockito.Mockito.verify;
         Long idSecteurActivite = 1L;
         Long idFournisseur = 2L;
 
-        // Créer un mock de Fournisseur et le configurer pour être retourné par le repository
+        // Créer un mock de Fournisseur
         Fournisseur mockFournisseur = new Fournisseur();
         when(fournisseurRepository.findById(idFournisseur)).thenReturn(Optional.of(mockFournisseur));
 
-        // Créer un mock de SecteurActivite et le configurer pour être retourné par le repository
+        // Créer un mock de SecteurActivite
         SecteurActivite mockSecteurActivite = new SecteurActivite();
         when(secteurActiviteRepository.findById(idSecteurActivite)).thenReturn(Optional.of(mockSecteurActivite));
-
-        // Configurer le mock pour la méthode save du repository de fournisseur
-        when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(mockFournisseur);
 
         // Test
         fournisseurService.assignSecteurActiviteToFournisseur(idSecteurActivite, idFournisseur);
@@ -148,6 +145,12 @@ import static org.mockito.Mockito.verify;
         // Vérification que la méthode save a été appelée sur le repository de fournisseur
         verify(fournisseurRepository).save(mockFournisseur);
     }
+
+
+
+
+
+
 
 
 }
