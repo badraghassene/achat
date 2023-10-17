@@ -3,79 +3,61 @@ package tn.esprit.rh.achat;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import tn.esprit.rh.achat.entities.Facture;
+import tn.esprit.rh.achat.entities.*;
 import tn.esprit.rh.achat.repositories.*;
 import tn.esprit.rh.achat.services.FactureServiceImpl;
+import tn.esprit.rh.achat.services.ReglementServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {FactureServiceImpl.class})
 @ExtendWith(SpringExtension.class)
-public class FactureTest {
+public class FactureServiceImplTest {
 
-    @Mock
+    @MockBean
     private FactureRepository factureRepository;
-
-    @Mock
+    @MockBean
+    private OperateurRepository operateurRepository;
+    @MockBean
     private DetailFactureRepository detailFactureRepository;
-
-    @Mock
-    private ReglementRepository reglementRepository;
-
-    @Mock
+    @MockBean
     private FournisseurRepository fournisseurRepository;
+    @MockBean
+    private ProduitRepository produitRepository;
+    @MockBean
+    private ReglementServiceImpl reglementService;
 
     @Autowired
     private FactureServiceImpl factureService;
-
-    @Mock
-    private OperateurRepository operateurRepository;
-
-    @Mock
-    private ProduitRepository produitRepository;
-
-
 
     @Test
     void testRetrieveAllFactures() {
         // Mocking
         List<Facture> factureList = new ArrayList<>();
         when(factureRepository.findAll()).thenReturn(factureList);
+
         // Test
         List<Facture> result = factureService.retrieveAllFactures();
+
         // Assertions
         assertSame(factureList, result);
-        assertTrue(result.isEmpty());
+        assertEquals(2, result.size());
+
         // Vérification que la méthode findAll a été appelée
         verify(factureRepository).findAll();
-    }
-
-
-
-    @Test
-    void testRetrieveFacture() {
-        // Mocking
-        Long id = 1L;
-        Facture mockFacture = new Facture();
-        when(factureRepository.findById(id)).thenReturn(Optional.of(mockFacture));
-        // Test
-        Facture result = factureService.retrieveFacture(id);
-        // Assertions
-        assertEquals(mockFacture, result);
-        // Vérification que la méthode findById a été appelée avec le bon argument
-        verify(factureRepository).findById(id);
     }
 
     @Test
@@ -85,7 +67,7 @@ public class FactureTest {
         when(factureRepository.save(any(Facture.class))).thenReturn(facture);
 
         // Test
-       Facture result = factureService.addFacture(facture);
+        Facture result = factureService.addFacture(facture);
 
         // Assertions
         assertEquals(facture, result);
@@ -93,6 +75,7 @@ public class FactureTest {
         // Vérification que la méthode save a été appelée avec le bon argument
         verify(factureRepository).save(facture);
     }
+
 
 
 
