@@ -25,7 +25,7 @@ import static org.mockito.Mockito.verify;
 
 @ContextConfiguration(classes = {FournisseurServiceImpl.class})
 @ExtendWith(SpringExtension.class)
-public class FournisseurServiceImplTest {
+ class FournisseurServiceImplTest {
 
     @Autowired
     private FournisseurServiceImpl fournisseurService;
