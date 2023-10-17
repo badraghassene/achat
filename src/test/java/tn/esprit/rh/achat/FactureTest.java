@@ -3,45 +3,47 @@ package tn.esprit.rh.achat;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import tn.esprit.rh.achat.entities.*;
+import tn.esprit.rh.achat.entities.Facture;
 import tn.esprit.rh.achat.repositories.*;
 import tn.esprit.rh.achat.services.FactureServiceImpl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 @ContextConfiguration(classes = {FactureServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 public class FactureTest {
 
-    @MockBean
+    @Mock
     private FactureRepository factureRepository;
 
-    @MockBean
+    @Mock
     private DetailFactureRepository detailFactureRepository;
 
-    @MockBean
+    @Mock
     private ReglementRepository reglementRepository;
 
-    @MockBean
+    @Mock
     private FournisseurRepository fournisseurRepository;
 
     @Autowired
     private FactureServiceImpl factureService;
 
-    @MockBean
+    @Mock
     private OperateurRepository operateurRepository;
 
-    @MockBean
+    @Mock
     private ProduitRepository produitRepository;
 
 
