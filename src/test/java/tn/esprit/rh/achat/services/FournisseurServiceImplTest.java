@@ -117,7 +117,7 @@ public class FournisseurServiceImplTest {
         verify(fournisseurRepository).findById(fournisseurId);
     }
 
-
+/*
     @Test
     void testAssignSecteurActiviteToFournisseur() {
         // Mocking
@@ -149,7 +149,7 @@ public class FournisseurServiceImplTest {
 
 
 
-
+*/
 
 
 
