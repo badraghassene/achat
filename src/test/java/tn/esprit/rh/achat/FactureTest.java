@@ -12,20 +12,16 @@ import tn.esprit.rh.achat.entities.*;
 import tn.esprit.rh.achat.repositories.*;
 import tn.esprit.rh.achat.services.FactureServiceImpl;
 import tn.esprit.rh.achat.services.ReglementServiceImpl;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(classes = {FactureServiceImpl.class})
 @ExtendWith(SpringExtension.class)
-public class FactureServiceImplTest {
+public class FactureTest {
 
     @MockBean
     private FactureRepository factureRepository;
@@ -45,40 +41,47 @@ public class FactureServiceImplTest {
 
     @Test
     void testRetrieveAllFactures() {
-        // Mocking
-        List<Facture> factureList = new ArrayList<>();
-        when(factureRepository.findAll()).thenReturn(factureList);
-
-        // Test
-        List<Facture> result = factureService.retrieveAllFactures();
-
-        // Assertions
-        assertSame(factureList, result);
-        assertEquals(2, result.size());
-
-        // Vérification que la méthode findAll a été appelée
+        ArrayList<Facture> factures = new ArrayList<>();
+        when(factureRepository.findAll()).thenReturn(factures);
+        List<Facture> allFactures = factureService.retrieveAllFactures();
+        assertSame(factures, allFactures);
+        assertTrue(allFactures.isEmpty());
         verify(factureRepository).findAll();
     }
 
     @Test
     void testAddFacture() {
-        // Mocking
         Facture facture = new Facture();
         when(factureRepository.save(any(Facture.class))).thenReturn(facture);
-
-        // Test
         Facture result = factureService.addFacture(facture);
-
-        // Assertions
         assertEquals(facture, result);
-
-        // Vérification que la méthode save a été appelée avec le bon argument
         verify(factureRepository).save(facture);
     }
 
+    @Test
+    void testRetrieveFacture() throws Exception {
+        Long factureId = 1L;
+        Facture facture = new Facture();
+        when(factureRepository.findById(factureId)).thenReturn(Optional.of(facture));
 
+        Facture result = factureService.retrieveFacture(factureId);
 
+        assertEquals(facture, result);
+
+        verify(factureRepository).findById(factureId);
+    }
+
+    @Test
+    void testCancelFacture() throws Exception {
+        Long factureId = 1L;
+        Facture facture = new Facture();
+        when(factureRepository.findById(factureId)).thenReturn(Optional.of(facture));
+
+        factureService.cancelFacture(factureId);
+
+        verify(factureRepository).findById(factureId);
+
+        assertTrue(facture.getArchivee());
+    }
 
 }
-
-
