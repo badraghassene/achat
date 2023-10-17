@@ -132,6 +132,9 @@ public class FournisseurServiceImplTest {
         SecteurActivite mockSecteurActivite = new SecteurActivite();
         when(secteurActiviteRepository.findById(idSecteurActivite)).thenReturn(Optional.of(mockSecteurActivite));
 
+        // Configurer le mock pour la méthode save du repository de fournisseur
+        when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(mockFournisseur);
+
         // Test
         fournisseurService.assignSecteurActiviteToFournisseur(idSecteurActivite, idFournisseur);
 
@@ -145,7 +148,6 @@ public class FournisseurServiceImplTest {
         // Vérification que la méthode save a été appelée sur le repository de fournisseur
         verify(fournisseurRepository).save(mockFournisseur);
     }
-
 
 
 }
