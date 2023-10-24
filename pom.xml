@@ -77,8 +77,19 @@
 			<artifactId>modelmapper</artifactId>
 			<version>2.3.5</version>
 		</dependency>
+
+		<!-- Deploy to Nexus -->
+
 	</dependencies>
 
+	<distributionManagement>
+		<repository>
+			<id>deploymentRepo</id>
+			<name>Nexus Repository</name>
+			<url>http://192.168.1.19:8081/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
+ 
 	<build>
 		<plugins>
 			<plugin>
