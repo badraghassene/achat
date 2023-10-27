@@ -1,16 +1,23 @@
 version: "2"
 services:
   mysqldb:
-    container_name: mysqldb
-    image: mysql:8
+    image: mysql:8.0.31
     restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
   achat:
-    image: springboot
     depends_on:
       - mysqldb
-    container_name: springProject
+    build: ./
     restart: on-failure
+    image: spring-boot
     ports:
-      - 9001:9001
+      - 9090:9089
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+volumes:
+  db:
