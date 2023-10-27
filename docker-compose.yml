@@ -7,6 +7,9 @@ services:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: your_password_here
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
   achat:
     depends_on:
       - mysqldb
