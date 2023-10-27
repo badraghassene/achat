@@ -12,7 +12,6 @@ services:
       - mysqldb
     build: ./
     restart: on-failure
-    image: spring-boot
     ports:
       - 9089:9089
     volumes:
