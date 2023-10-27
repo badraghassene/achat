@@ -7,7 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
   achat:
-    image: waelaissi/projet-achat
+    image: springBoot
     depends_on:
       - mysqldb
     container_name: springProject
