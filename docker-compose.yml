@@ -1,25 +1,16 @@
 version: "2"
 services:
   mysqldb:
-    image: mysql:latest
+    container_name: mysqldb
+    image: mysql:8
     restart: unless-stopped
-    ports:
-      - 3306:3306
-    volumes:
-      - db:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: root
   achat:
+    image: waelaissi/projet-achat
     depends_on:
       - mysqldb
-    build: ./
+    container_name: springProject
     restart: on-failure
     ports:
       - 9001:9001
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-volumes:
-  db:
