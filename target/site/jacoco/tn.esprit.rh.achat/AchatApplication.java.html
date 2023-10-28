@@ -2,15 +2,21 @@
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
+import org.modelmapper.ModelMapper;
 @EnableScheduling
 @SpringBootApplication
-<span class="nc" id="L9">public class AchatApplication {</span>
+<span class="nc" id="L10">public class AchatApplication {</span>
+    @Bean
+    public ModelMapper modelMapper() {
+<span class="nc" id="L13">        return new ModelMapper();</span>
+    }
+
 
     public static void main(String[] args) {
-<span class="nc" id="L12">        SpringApplication.run(AchatApplication.class, args);</span>
-<span class="nc" id="L13">    }</span>
+<span class="nc" id="L18">        SpringApplication.run(AchatApplication.class, args);</span>
+<span class="nc" id="L19">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -13,6 +13,7 @@ D:\AchatPipeline\src\main\java\tn\esprit\rh\achat\repositories\FournisseurReposi
 D:\AchatPipeline\src\main\java\tn\esprit\rh\achat\controllers\FournisseurRestController.java
 D:\AchatPipeline\src\main\java\tn\esprit\rh\achat\entities\Produit.java
 D:\AchatPipeline\src\main\java\tn\esprit\rh\achat\services\StockServiceImpl.java
+D:\AchatPipeline\src\main\java\tn\esprit\rh\achat\entitiesDTO\ReglementDTO.java
 D:\AchatPipeline\src\main\java\tn\esprit\rh\achat\entities\CategorieFournisseur.java
 D:\AchatPipeline\src\main\java\tn\esprit\rh\achat\services\IFournisseurService.java
 D:\AchatPipeline\src\main\java\tn\esprit\rh\achat\services\FactureServiceImpl.java

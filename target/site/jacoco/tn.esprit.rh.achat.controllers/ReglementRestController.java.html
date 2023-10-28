@@ -4,59 +4,64 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.rh.achat.entitiesDTO.ReglementDTO;
 import tn.esprit.rh.achat.entities.Reglement;
 import tn.esprit.rh.achat.services.IReglementService;
 
 import java.util.Date;
 import java.util.List;
-
+import org.modelmapper.ModelMapper;
 @RestController
 @Api(tags = &quot;Gestion des reglements&quot;)
 @RequestMapping(&quot;/reglement&quot;)
 @CrossOrigin(&quot;*&quot;)
-<span class="nc" id="L17">public class ReglementRestController {</span>
+<span class="nc" id="L18">public class ReglementRestController {</span>
 
     @Autowired
     IReglementService reglementService;
+    @Autowired
+    private ModelMapper modelMapper;
 
 
     // http://localhost:8089/SpringMVC/reglement/add-reglement
     @PostMapping(&quot;/add-reglement&quot;)
     @ResponseBody
-    public Reglement addReglement(@RequestBody Reglement r) {
-<span class="nc" id="L27">        Reglement reglement = reglementService.addReglement(r);</span>
-<span class="nc" id="L28">        return reglement;</span>
+    public ReglementDTO addReglement(@RequestBody ReglementDTO reglementDto) {
+<span class="nc" id="L30">        Reglement reglementRequest = modelMapper.map(reglementDto, Reglement.class);</span>
+<span class="nc" id="L31">        Reglement reglement = reglementService.addReglement(reglementRequest);</span>
+        // convert entity to DTO
+<span class="nc" id="L33">        return modelMapper.map(reglement, ReglementDTO.class);</span>
     }
     @GetMapping(&quot;/retrieve-all-reglements&quot;)
     @ResponseBody
     public List&lt;Reglement&gt; getReglement() {
-<span class="nc" id="L33">        List&lt;Reglement&gt; list = reglementService.retrieveAllReglements();</span>
-<span class="nc" id="L34">        return list;</span>
+<span class="nc" id="L38">        return reglementService.retrieveAllReglements();</span>
+
     }
 
-    // http://localhost:8089/SpringMVC/reglement/retrieve-reglement/8
+
     @GetMapping(&quot;/retrieve-reglement/{reglement-id}&quot;)
     @ResponseBody
     public Reglement retrieveReglement(@PathVariable(&quot;reglement-id&quot;) Long reglementId) {
-<span class="nc" id="L41">        return reglementService.retrieveReglement(reglementId);</span>
+<span class="nc" id="L46">        return reglementService.retrieveReglement(reglementId);</span>
     }
 
     // http://localhost:8089/SpringMVC/reglement/retrieveReglementByFacture/8
     @GetMapping(&quot;/retrieveReglementByFacture/{facture-id}&quot;)
     @ResponseBody
     public List&lt;Reglement&gt; retrieveReglementByFacture(@PathVariable(&quot;facture-id&quot;) Long factureId) {
-<span class="nc" id="L48">        return reglementService.retrieveReglementByFacture(factureId);</span>
+<span class="nc" id="L53">        return reglementService.retrieveReglementByFacture(factureId);</span>
     }
 
-    // http://localhost:8089/SpringMVC/reglement/getChiffreAffaireEntreDeuxDate/{startDate}/{endDate}
+
     @GetMapping(value = &quot;/getChiffreAffaireEntreDeuxDate/{startDate}/{endDate}&quot;)
     public float getChiffreAffaireEntreDeuxDate(
             @PathVariable(name = &quot;startDate&quot;) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
             @PathVariable(name = &quot;endDate&quot;) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
         try {
-<span class="nc" id="L57">            return reglementService.getChiffreAffaireEntreDeuxDate(startDate, endDate);</span>
-<span class="nc" id="L58">        } catch (Exception e) {</span>
-<span class="nc" id="L59">            return 0;</span>
+<span class="nc" id="L62">            return reglementService.getChiffreAffaireEntreDeuxDate(startDate, endDate);</span>
+<span class="nc" id="L63">        } catch (Exception e) {</span>
+<span class="nc" id="L64">            return 0;</span>
         }
     }
 }
