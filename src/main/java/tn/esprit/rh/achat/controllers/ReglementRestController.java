@@ -1,6 +1,7 @@
 package tn.esprit.rh.achat.controllers;
 
-import io.swagger.annotations.Api;
+//import io.swagger.annotations.Api;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,8 @@ import java.util.Date;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 @RestController
-@Api(tags = "Gestion des reglements")
+//@Api(tags = "Gestion des reglements")
+@AllArgsConstructor
 @RequestMapping("/reglement")
 @CrossOrigin("*")
 public class ReglementRestController {

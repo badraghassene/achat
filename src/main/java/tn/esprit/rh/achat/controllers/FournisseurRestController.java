@@ -1,6 +1,7 @@
 package tn.esprit.rh.achat.controllers;
 
-import io.swagger.annotations.Api;
+//import io.swagger.annotations.Api;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.rh.achat.entities.Fournisseur;
@@ -10,7 +11,8 @@ import java.util.List;
 
 
 @RestController
-@Api(tags = "Gestion des fournisseurss")
+//@Api(tags = "Gestion des fournisseurss")
+@AllArgsConstructor
 @RequestMapping("/fournisseur")
 public class FournisseurRestController {
 
