@@ -109,3 +109,8 @@ f
 6src/main/java/tn/esprit/rh/achat/entities/Produit.java,e\2\e2220286d599e5889fd98c23f8c36a95afe2a3cd
 a
 1src/test/java/tn/esprit/rh/achat/FactureTest.java,a\f\af53a0aaf718b14ada1ebccbcd2f2c3931c36261
+B
+docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
+:
+
+Dockerfile,6\6\6651ddff6eb82c840ced7c1dddee15c6e1913dd4
