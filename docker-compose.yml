@@ -3,6 +3,8 @@ services:
   mysqldb:
     image: mysql
     restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=anis
     ports:
       - 3306:3306
     volumes:
