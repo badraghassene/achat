@@ -11,6 +11,8 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD
       - MYSQL_ROOT_PASSWORD=test
       - MYSQL_DATABASE=achatdb
+    networks:
+      - mynetwork
   achat:
     depends_on:
       - mysqldb
@@ -31,5 +33,11 @@ services:
 }'
     stdin_open: true
     tty: true
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
 volumes:
   db:
