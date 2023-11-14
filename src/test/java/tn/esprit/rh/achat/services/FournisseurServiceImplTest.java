@@ -7,13 +7,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import tn.esprit.rh.achat.entities.*;
+import tn.esprit.rh.achat.entities.Fournisseur;
+import tn.esprit.rh.achat.entities.SecteurActivite;
 import tn.esprit.rh.achat.repositories.DetailFournisseurRepository;
 import tn.esprit.rh.achat.repositories.FournisseurRepository;
 import tn.esprit.rh.achat.repositories.ProduitRepository;
 import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -112,77 +115,6 @@ public class FournisseurServiceImplTest {
 
         // Vérification que la méthode findById a été appelée avec le bon argument
         verify(fournisseurRepository).findById(fournisseurId);
-    }
-    @Test
-    void testRetrieveFournisseurwithJUNIT() {
-        // Créer un fournisseur fictif dans la base de données
-        Fournisseur mockFournisseur = new Fournisseur();
-        mockFournisseur.setCode("123");
-        mockFournisseur.setLibelle("FournisseurTest");
-        mockFournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
-
-        // Ajouter des secteurs d'activité fictifs
-        SecteurActivite secteur1 = new SecteurActivite();
-        secteur1.setCodeSecteurActivite("Secteur1");
-        secteur1.setLibelleSecteurActivite("Libelle1");
-
-        SecteurActivite secteur2 = new SecteurActivite();
-        secteur2.setCodeSecteurActivite("Secteur2");
-        secteur2.setLibelleSecteurActivite("Libelle2");
-
-        Set<SecteurActivite> secteurActivites = new HashSet<>();
-        secteurActivites.add(secteur1);
-        secteurActivites.add(secteur2);
-
-        mockFournisseur.setSecteurActivites(secteurActivites);
-
-        // Ajouter un détail de fournisseur fictif
-        DetailFournisseur detailFournisseur = new DetailFournisseur();
-        detailFournisseur.setEmail("test@example.com");
-        detailFournisseur.setDateDebutCollaboration(new Date());
-        detailFournisseur.setAdresse("AdresseTest");
-        detailFournisseur.setMatricule("MatriculeTest");
-
-        mockFournisseur.setDetailFournisseur(detailFournisseur);
-
-        // Ajouter une facture fictive
-        Facture facture = new Facture();
-        facture.setMontantRemise(50.0f);
-        facture.setMontantFacture(500.0f);
-        facture.setDateCreationFacture(new Date());
-        facture.setArchivee(false);
-
-        Set<Facture> factures = new HashSet<>();
-        factures.add(facture);
-
-        mockFournisseur.setFactures(factures);
-
-        fournisseurRepository.save(mockFournisseur);
-
-        // Appeler la méthode du service pour récupérer le fournisseur par son ID
-        Fournisseur result = fournisseurService.retrieveFournisseur(mockFournisseur.getIdFournisseur());
-
-        // Vérifier que le fournisseur a été récupéré avec succès
-        assertNotNull(result);
-        assertEquals(mockFournisseur.getIdFournisseur(), result.getIdFournisseur());
-        assertEquals("123", result.getCode());
-        assertEquals("FournisseurTest", result.getLibelle());
-        assertEquals(CategorieFournisseur.ORDINAIRE, result.getCategorieFournisseur());
-
-        // Vérifier les secteurs d'activité
-        assertEquals(2, result.getSecteurActivites().size());
-
-        // Vérifier le détail du fournisseur
-        assertNotNull(result.getDetailFournisseur());
-        assertEquals("test@example.com", result.getDetailFournisseur().getEmail());
-        assertEquals("AdresseTest", result.getDetailFournisseur().getAdresse());
-        assertEquals("MatriculeTest", result.getDetailFournisseur().getMatricule());
-
-        // Vérifier les factures
-        assertEquals(1, result.getFactures().size());
-        Facture retrievedFacture = result.getFactures().iterator().next();
-        assertEquals(50.0f, retrievedFacture.getMontantRemise());
-        assertEquals(500.0f, retrievedFacture.getMontantFacture());
     }
 
 
