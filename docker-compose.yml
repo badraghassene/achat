@@ -1,4 +1,4 @@
-ersion: "2"
+version: "2"
 services:
   mysqldb:
     image: mysql
@@ -7,12 +7,14 @@ services:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
   achat:
     depends_on:
       - mysqldb
     build: ./
     restart: on-failure
-    image: waelaissi/projet-achat:1.0
+    image: spring-boot
     ports:
       - 8090:8089
     volumes:
