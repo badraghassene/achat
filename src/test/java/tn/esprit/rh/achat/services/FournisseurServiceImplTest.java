@@ -1,5 +1,6 @@
 package tn.esprit.rh.achat.services;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,11 @@ public class FournisseurServiceImplTest {
         verify(fournisseurRepository).findById(fournisseurId);
     }
 
-
+    @Test
+     void TestRetrieveAllFournisseursJUNIT() {
+        List<Fournisseur> fournisseur = fournisseurService.retrieveAllFournisseurs();
+        Assertions.assertNotNull(fournisseur);
+    }
 
 
 /*
