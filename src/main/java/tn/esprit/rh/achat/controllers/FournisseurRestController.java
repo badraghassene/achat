@@ -40,8 +40,8 @@ public class FournisseurRestController   {
 	@PostMapping("/add-fournisseur")
 	@ResponseBody
 	public FournisseurDTO addFournisseur(@RequestBody FournisseurDTO fournisseurDto) {
-		Fournisseur FournisseurRequest = modelMapper.map(fournisseurDto, Fournisseur.class);
-		Fournisseur fournisseur = fournisseurService.addFournisseur(FournisseurRequest);
+		Fournisseur fournisseurRequest = modelMapper.map(fournisseurDto, Fournisseur.class);
+		Fournisseur fournisseur = fournisseurService.addFournisseur(fournisseurRequest);
 		// convert entity to DTO
 		return modelMapper.map(fournisseur, FournisseurDTO.class);
 	}
